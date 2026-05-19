@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buku Panduan | Nusa Putra: Youth Fest 2026</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- 
+    <!-- Chosen Palette: Navy Blue, Gold/Yellow, Soft Gray, White, Emerald/Green for Success -->
+    <!-- Application Structure Plan: A complete, fully-featured SPA Guidebook. Includes Hero, Info, Timeline, Detailed Rules + AI Assistants, Final Schedule, and a dynamic Registration Form linked to formsubmit.co. -->
+    <!-- Visualization & Content Choices: 
+         1. Interactive Form -> Linked to suksesridwan1@gmail.com via AJAX.
+         2. AI Assistants -> Re-integrated Gemini for MSQ and Speech brainstorming.
+         3. Payment Info -> BCA, Seabank, DANA under Yunisa Zahro Deristia.
+         4. Charts -> Polar and Doughnut charts for scoring weights.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    -->
+
+    <style>
+        /* Custom Styles & Chart Container Enforcement */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F8FAFC; 
+            color: #1E293B; 
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; 
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh; 
+            min-height: 300px;
+            max-height: 450px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+
+        .nav-link.active {
+            border-bottom: 3px solid #EAB308; 
+            color: #1D4ED8; 
+            font-weight: 600;
+        }
+
+        .tab-btn.active {
+            background-color: #1E3A8A; 
+            color: white;
+        }
+
+        /* Markdown Output Styles for AI */
+        .ai-output-content h1, .ai-output-content h2, .ai-output-content h3 { font-size: 1.25rem; font-weight: bold; color: #1E3A8A; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .ai-output-content h4 { font-size: 1.1rem; font-weight: bold; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .ai-output-content p { margin-bottom: 0.75rem; line-height: 1.6; text-align: justify; }
+        .ai-output-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+        .ai-output-content ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1rem; }
+        .ai-output-content strong { color: #1E293B; }
+        .ai-output-content blockquote { border-left: 4px solid #EAB308; padding-left: 1rem; font-style: italic; color: #475569; margin-bottom: 1rem; background-color: #F8FAFC; padding: 0.5rem 1rem;}
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- Top Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-900 text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg">
+                        NP
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-blue-900 leading-tight">YOUTH FEST 2026</h1>
+                        <p class="text-xs text-gray-500 font-semibold">Universitas Nusa Putra</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex space-x-6 overflow-x-auto no-scrollbar">
+                    <button onclick="navigate('home')" id="nav-home" class="nav-link active pb-2 text-gray-600 hover:text-blue-700 transition">Beranda</button>
+                    <button onclick="navigate('informasi')" id="nav-informasi" class="nav-link pb-2 text-gray-600 hover:text-blue-700 transition">Informasi Umum</button>
+                    <button onclick="navigate('pendaftaran')" id="nav-pendaftaran" class="nav-link pb-2 text-gray-600 hover:text-blue-700 transition">Timeline</button>
+                    <button onclick="navigate('lomba')" id="nav-lomba" class="nav-link pb-2 text-gray-600 hover:text-blue-700 transition">Panduan Lomba</button>
+                    <button onclick="navigate('jadwal')" id="nav-jadwal" class="nav-link pb-2 text-gray-600 hover:text-blue-700 transition">Jadwal Acara</button>
+                    <button onclick="navigate('formulir')" id="nav-formulir" class="bg-yellow-500 text-blue-900 px-5 py-2 rounded-md font-bold hover:bg-yellow-400 transition shadow-sm ml-4">Formulir Pendaftaran</button>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden text-3xl text-blue-900" onclick="toggleMobileMenu()">&#9776;</button>
+            </div>
+            
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu" class="hidden lg:hidden pb-4 flex flex-col space-y-2">
+                <button onclick="navigate('home'); toggleMobileMenu()" class="text-left py-2 px-4 bg-gray-50 rounded text-blue-900 font-medium">Beranda</button>
+                <button onclick="navigate('informasi'); toggleMobileMenu()" class="text-left py-2 px-4 bg-gray-50 rounded text-blue-900 font-medium">Informasi Umum</button>
+                <button onclick="navigate('pendaftaran'); toggleMobileMenu()" class="text-left py-2 px-4 bg-gray-50 rounded text-blue-900 font-medium">Timeline Pendaftaran</button>
+                <button onclick="navigate('lomba'); toggleMobileMenu()" class="text-left py-2 px-4 bg-gray-50 rounded text-blue-900 font-medium">Panduan Lomba</button>
+                <button onclick="navigate('jadwal'); toggleMobileMenu()" class="text-left py-2 px-4 bg-gray-50 rounded text-blue-900 font-medium">Jadwal Acara</button>
+                <button onclick="navigate('formulir'); toggleMobileMenu()" class="text-left py-2 px-4 bg-yellow-500 rounded text-blue-900 font-bold">Isi Formulir Pendaftaran</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow container mx-auto px-4 lg:px-8 py-8">
+
+        <!-- ================= SECTION: BERANDA ================= -->
+        <section id="sec-home" class="view-section animate-fade-in">
+            <div class="bg-gradient-to-br from-blue-900 to-blue-700 rounded-2xl p-8 lg:p-12 text-white shadow-xl mb-12 text-center lg:text-left relative overflow-hidden">
+                <div class="absolute top-[-50px] right-[-50px] w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-[-50px] left-[-50px] w-48 h-48 bg-yellow-400 opacity-20 rounded-full blur-2xl"></div>
+                
+                <div class="relative z-10 max-w-4xl">
+                    <span class="inline-block px-4 py-1 bg-yellow-500 text-blue-900 font-bold rounded-full text-sm mb-4">BUKU PANDUAN RESMI</span>
+                    <h2 class="text-4xl lg:text-6xl font-extrabold mb-4 leading-tight">Nusa Putra: <br><span class="text-yellow-400">Youth Fest 2026</span></h2>
+                    <p class="text-xl lg:text-2xl font-light mb-6">"Mengwujudkan generasi muda yang unggul siap berkompetisi dan bersaing di skala global."</p>
+                    <p class="text-blue-100 mb-8 max-w-2xl">Panduan interaktif ini berisi seluruh informasi pendaftaran, timeline seleksi, ketentuan perlombaan Musabaqah Syarhil Qur’an (MSQ), dan English Speech Competition tingkat SMA/Sederajat.</p>
+                    <button onclick="navigate('formulir')" class="bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-bold py-3 px-8 rounded-lg shadow-lg transition transform hover:scale-105">Daftar Sekarang &#10140;</button>
+                </div>
+            </div>
+
+            <!-- Intro text -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4 border-b pb-2">📖 Pendahuluan</h3>
+                    <p class="text-gray-600 mb-4 text-justify">
+                        Masa sekolah menengah atas merupakan fase krusial dalam pembentukan identitas dan arah masa depan. Di era globalisasi, siswa dituntut unggul dalam akademik dan memiliki <em>soft skills</em> berupa kemampuan retorika, penguasaan bahasa internasional, serta fondasi spiritual yang kokoh.
+                    </p>
+                    <p class="text-gray-600 text-justify">
+                        Universitas Nusa Putra, dengan visinya sebagai "Kampus Global", menyelenggarakan <strong>Nusa Putra: Youth Fest 2026</strong> untuk menjembatani potensi siswa/i SMA/Sederajat menuju gerbang pendidikan tinggi yang berkualitas dan berdaya saing internasional.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4 border-b pb-2">🎯 Tujuan Kegiatan</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start"><span class="mr-2 text-green-500">&#10004;</span> Meningkatkan minat dan bakat pelajar dalam bidang tilawah/syarhil Qur'an dan public speaking.</li>
+                        <li class="flex items-start"><span class="mr-2 text-green-500">&#10004;</span> Membangun karakter generasi muda yang berakhlak mulia dan berwawasan global.</li>
+                        <li class="flex items-start"><span class="mr-2 text-green-500">&#10004;</span> Memperkenalkan Universitas Nusa Putra kepada masyarakat luas.</li>
+                        <li class="flex items-start"><span class="mr-2 text-green-500">&#10004;</span> Mempererat tali silaturahmi antar pelajar se-Indonesia .</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: INFORMASI UMUM ================= -->
+        <section id="sec-informasi" class="view-section hidden animate-fade-in">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-blue-900 border-l-4 border-yellow-500 pl-4">Informasi Umum Kegiatan</h2>
+                <p class="text-gray-600 mt-2">Detail pelaksanaan dan narahubung panitia Nusa Putra Youth Fest 2026.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow border border-blue-50 flex items-center space-x-4">
+                    <div class="text-4xl">📅</div>
+                    <div>
+                        <h4 class="text-sm text-gray-500 font-bold uppercase tracking-wider">Waktu Pelaksanaan</h4>
+                        <p class="text-lg font-bold text-blue-900">28 Juni 2026</p>
+                        <p class="text-sm text-gray-600">08:00 WIB (Final Offline)</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow border border-blue-50 flex items-center space-x-4">
+                    <div class="text-4xl">📍</div>
+                    <div>
+                        <h4 class="text-sm text-gray-500 font-bold uppercase tracking-wider">Tempat Pelaksanaan</h4>
+                        <p class="text-lg font-bold text-blue-900">Auditorium Univ. Nusa Putra</p>
+                        <p class="text-sm text-gray-600">Jl. Raya Cibolang No.21, Cisaat, Sukabumi</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow border border-blue-50 flex items-center space-x-4">
+                    <div class="text-4xl">👥</div>
+                    <div>
+                        <h4 class="text-sm text-gray-500 font-bold uppercase tracking-wider">Penyelenggara</h4>
+                        <p class="text-lg font-bold text-blue-900">BEM Universitas Nusa Putra</p>
+                        <p class="text-sm text-gray-600">Panitia Pelaksana Youth Fest</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-blue-50 p-8 rounded-xl border border-blue-100">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4 flex items-center">📞 Contact Person</h3>
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                            <p class="font-bold text-gray-800">Eldi Erwando (Ketua Pelaksana)</p>
+                            <p class="text-gray-600 text-sm">&#128241; 0822-5515-8515 (WhatsApp)</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                            <p class="font-bold text-gray-800">Sekretariat Panitia</p>
+                            <p class="text-gray-600 text-sm">&#128241; 0812-XXXX-XXXX (WhatsApp)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-xl border border-blue-100">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4 flex items-center">🌐 Media Sosial & Email</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center"><span class="mr-3 text-2xl">&#128231;</span> bem@nusaputra.ac.id</li>
+                        <li class="flex items-center"><span class="mr-3 text-2xl">&#128247;</span> @bemnusaputra (Instagram)</li>
+                        <li class="flex items-center"><span class="mr-3 text-2xl">&#127760;</span> youthfest.nusaputra.ac.id</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: TIMELINE PENDAFTARAN ================= -->
+        <section id="sec-pendaftaran" class="view-section hidden animate-fade-in">
+            <div class="mb-8 flex justify-between items-end">
+                <div>
+                    <h2 class="text-3xl font-bold text-blue-900 border-l-4 border-yellow-500 pl-4">Timeline Pendaftaran & Seleksi</h2>
+                    <p class="text-gray-600 mt-2">Perhatikan secara detail jadwal pelaksanaan mulai dari pendaftaran hingga Final.</p>
+                </div>
+            </div>
+
+            <!-- Table Timeline Comprehensive -->
+            <div class="bg-white rounded-xl shadow overflow-hidden border border-gray-200">
+                <div class="bg-blue-900 text-white px-6 py-4">
+                    <h3 class="font-bold text-lg">⏳ Timeline Lengkap Kegiatan</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-600">
+                        <thead class="bg-gray-100 border-b">
+                            <tr>
+                                <th class="px-6 py-4 font-bold text-gray-800">Tahapan / Kegiatan</th>
+                                <th class="px-6 py-4 font-bold text-gray-800">Tanggal</th>
+                                <th class="px-6 py-4 font-bold text-gray-800">Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="px-6 py-3 font-medium text-gray-800">Open Registration Gelombang 1</td>
+                                <td class="px-6 py-3 font-bold text-blue-700 whitespace-nowrap">20 Mei – 2 Juni 2026</td>
+                                <td class="px-6 py-3">Early registration + promo besar</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="px-6 py-3 font-medium text-gray-800">Open Registration Gelombang 2</td>
+                                <td class="px-6 py-3 font-bold text-blue-700 whitespace-nowrap">3 Juni – 14 Juni 2026</td>
+                                <td class="px-6 py-3">Pendaftaran reguler</td>
+                            </tr>
+                            <tr class="border-b hover:bg-red-50 bg-red-50/30">
+                                <td class="px-6 py-3 font-medium text-red-700">Penutupan Pendaftaran</td>
+                                <td class="px-6 py-3 font-bold text-red-700 whitespace-nowrap">14 Juni 2026</td>
+                                <td class="px-6 py-3">Batas akhir upload berkas</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="px-6 py-3 font-medium text-gray-800">Seleksi Administrasi</td>
+                                <td class="px-6 py-3 font-medium text-gray-600 whitespace-nowrap">15 Juni 2026</td>
+                                <td class="px-6 py-3">Verifikasi peserta oleh panitia</td>
+                            </tr>
+                            <tr class="border-b hover:bg-indigo-50 bg-indigo-50/30">
+                                <td class="px-6 py-3 font-bold text-indigo-800">Pengumpulan Video Seleksi Online</td>
+                                <td class="px-6 py-3 font-bold text-indigo-700 whitespace-nowrap">16 – 18 Juni 2026</td>
+                                <td class="px-6 py-3">Penyisihan online untuk MSQ dan pidato</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="px-6 py-3 font-medium text-gray-800">Penilaian Seleksi Online</td>
+                                <td class="px-6 py-3 font-medium text-gray-600 whitespace-nowrap">19 – 21 Juni 2026</td>
+                                <td class="px-6 py-3">Oleh dewan juri</td>
+                            </tr>
+                            <tr class="border-b hover:bg-green-50 bg-green-50/30">
+                                <td class="px-6 py-3 font-bold text-green-800">Pengumuman Finalis</td>
+                                <td class="px-6 py-3 font-bold text-green-700 whitespace-nowrap">22 Juni 2026</td>
+                                <td class="px-6 py-3">Peserta yang lolos final offline</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="px-6 py-3 font-medium text-gray-800">Technical Meeting Finalis</td>
+                                <td class="px-6 py-3 font-medium text-gray-600 whitespace-nowrap">24 Juni 2026</td>
+                                <td class="px-6 py-3">Zoom / Google Meet</td>
+                            </tr>
+                            <tr class="hover:bg-yellow-100 bg-yellow-50">
+                                <td class="px-6 py-4 font-extrabold text-blue-900 text-base">Final Offline & Awarding</td>
+                                <td class="px-6 py-4 font-extrabold text-blue-900 text-base whitespace-nowrap">28 Juni 2026</td>
+                                <td class="px-6 py-4 font-bold text-gray-800">Auditorium Universitas Nusa Putra</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                 <button onclick="navigate('formulir')" class="bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-bold py-3 px-8 rounded-lg shadow-lg transition">Menuju Formulir Pendaftaran &#10140;</button>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: PANDUAN LOMBA (FULL DETAIL + AI) ================= -->
+        <section id="sec-lomba" class="view-section hidden animate-fade-in">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-blue-900 border-l-4 border-yellow-500 pl-4">Ketentuan Cabang Lomba</h2>
+                <p class="text-gray-600 mt-2">Pilih cabang lomba untuk melihat detail ketentuan, materi, bobot penilaian, dan fitur <strong>AI Assistant</strong>.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex space-x-2 mb-6 overflow-x-auto no-scrollbar pb-2">
+                <button onclick="switchTab('msq')" id="tab-msq" class="tab-btn active px-6 py-3 rounded-lg font-bold bg-blue-900 text-white shadow transition whitespace-nowrap">📖 Musabaqah Syarhil Qur'an (MSQ)</button>
+                <button onclick="switchTab('speech')" id="tab-speech" class="tab-btn px-6 py-3 rounded-lg font-bold bg-white text-blue-900 shadow border border-gray-200 transition whitespace-nowrap">🎤 English Speech Competition</button>
+            </div>
+
+            <!-- ================= SUB-SECTION: MSQ ================= -->
+            <div id="content-msq" class="tab-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Text Rules -->
+                    <div>
+                        <div class="bg-white p-6 rounded-xl shadow mb-6 border border-gray-100">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3 border-b pb-2">Definisi & Ketentuan Teknis</h3>
+                            <ul class="space-y-3 text-sm text-gray-700 text-justify">
+                                <li><strong>Definisi:</strong> Bidang musabaqah yang mengungkapkan isi kandungan Al-Qur'an secara puitis dan orasi.</li>
+                                <li><strong>Jumlah Tim:</strong> 3 orang (1 Pensyarah, 1 Qori, 1 Saritilawah).</li>
+                                <li><strong>Durasi:</strong> 15-20 Menit. (Lampu Hijau: Mulai, Kuning: Sisa 3 menit, Merah: Habis).</li>
+                                <li><strong>Kostum:</strong> Rapi, sopan, menutup aurat, seragam per tim (identitas sekolah).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow border border-gray-100">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3 border-b pb-2">Tema & Tata Tertib</h3>
+                            <p class="text-sm font-bold text-gray-800 mb-2">Tema Materi (Pilih salah satu):</p>
+                            <ol class="list-decimal pl-5 text-sm text-gray-700 space-y-1 mb-4">
+                                <li>Al-Qur'an sebagai pedoman generasi Z di era digital.</li>
+                                <li>Membangun toleransi beragama dalam bingkai kebhinnekaan.</li>
+                                <li>Etika menuntut ilmu dalam perspektif Islam.</li>
+                            </ol>
+                            <p class="text-sm font-bold text-red-600 mb-1">Larangan:</p>
+                            <p class="text-sm text-gray-700">Dilarang membawa teks saat tampil (kecuali Qori) dan menyinggung SARA.</p>
+                        </div>
+                    </div>
+
+                    <!-- Scoring Data Visualization -->
+                    <div class="bg-white p-6 rounded-xl shadow border border-gray-100 flex flex-col items-center">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2 text-center">Bobot Penilaian MSQ</h3>
+                        <!-- STRICT CHART CONTAINER -->
+                        <div class="chart-container">
+                            <canvas id="msqChart"></canvas>
+                        </div>
+                        <div class="mt-4 w-full text-xs text-gray-600">
+                            Isi (30%), Tajwid (25%), Retorika (20%), Penghayatan (15%), Adab/Waktu (10%).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✨ AI Assistant for MSQ -->
+                <div class="bg-gradient-to-br from-indigo-50 to-blue-50 p-6 lg:p-8 rounded-xl shadow-md border border-indigo-100 mb-4">
+                    <h3 class="text-2xl font-bold text-indigo-900 mb-2 flex items-center"><span class="text-3xl mr-3">🤖</span> AI MSQ Concept Assistant</h3>
+                    <p class="text-gray-600 mb-6 text-sm">Butuh inspirasi konsep Syarahan? AI ini akan menghasilkan ide judul puitis, rekomendasi ayat Al-Qur'an, dan kerangka materi berdasarkan tema.</p>
+                    
+                    <div class="flex flex-col md:flex-row gap-4 mb-4">
+                        <select id="msq-theme-select" class="flex-grow p-3 rounded-lg border-2 border-indigo-200 focus:outline-none focus:ring-1 focus:ring-indigo-500 font-medium text-gray-700">
+                            <option value="Al-Qur'an sebagai pedoman generasi Z di era digital">Al-Qur'an sebagai pedoman generasi Z di era digital</option>
+                            <option value="Membangun toleransi beragama dalam bingkai kebhinnekaan">Membangun toleransi beragama dalam bingkai kebhinnekaan</option>
+                            <option value="Etika menuntut ilmu dalam perspektif Islam">Etika menuntut ilmu dalam perspektif Islam</option>
+                        </select>
+                        <button id="btn-generate-msq" onclick="generateMSQIdea()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow transition whitespace-nowrap">
+                            Generate Ide ✨
+                        </button>
+                    </div>
+                    <div id="msq-ai-output" class="hidden bg-white p-6 rounded-lg border border-indigo-100 text-sm text-gray-700 shadow-inner ai-output-content"></div>
+                </div>
+            </div>
+
+            <!-- ================= SUB-SECTION: SPEECH ================= -->
+            <div id="content-speech" class="tab-content hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Text Rules -->
+                    <div>
+                        <div class="bg-white p-6 rounded-xl shadow mb-6 border border-gray-100">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3 border-b pb-2">Ketentuan & Syarat Tampil</h3>
+                            <ul class="space-y-3 text-sm text-gray-700 text-justify">
+                                <li><strong>Peserta:</strong> Perorangan (Individu).</li>
+                                <li><strong>Bahasa:</strong> Wajib Full Bahasa Inggris (kecuali salam pembuka).</li>
+                                <li><strong>Durasi:</strong> Maksimal 7 Menit.</li>
+                                <li><strong>Dresscode:</strong> Seragam sekolah lengkap/jas almamater, formal.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow border border-gray-100">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3 border-b pb-2">Tema & Tata Tertib Pidato</h3>
+                            <p class="text-sm font-bold text-gray-800 mb-2">Tema Pidato (Pilih salah satu):</p>
+                            <ol class="list-decimal pl-5 text-sm text-gray-700 space-y-1 mb-4">
+                                <li>The Role of Youth in Global Digital Transformation.</li>
+                                <li>Preserving Local Culture in the Modern Era.</li>
+                                <li>Education as a Weapon to Change the World.</li>
+                            </ol>
+                            <p class="text-sm font-bold text-red-600 mb-1">Strictly No AI Policy:</p>
+                            <p class="text-sm text-gray-700">Naskah harus orisinal. Ketahuan menggunakan AI generator secara penuh saat tampil akan didiskualifikasi. Dilarang membawa teks (hanya cue cards A6).</p>
+                        </div>
+                    </div>
+
+                    <!-- Scoring Data Visualization -->
+                    <div class="bg-white p-6 rounded-xl shadow border border-gray-100 flex flex-col items-center">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2 text-center">Bobot Penilaian Speech</h3>
+                        <!-- STRICT CHART CONTAINER -->
+                        <div class="chart-container">
+                            <canvas id="speechChart"></canvas>
+                        </div>
+                        <div class="mt-4 w-full text-xs text-gray-600">
+                            Content (30%), Public Speaking (25%), Pronunciation (20%), Grammar (15%), Time (10%).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✨ AI Assistant for Speech -->
+                <div class="bg-gradient-to-br from-indigo-50 to-blue-50 p-6 lg:p-8 rounded-xl shadow-md border border-indigo-100 mb-4">
+                    <h3 class="text-2xl font-bold text-indigo-900 mb-2 flex items-center"><span class="text-3xl mr-3">🤖</span> AI Speech Outline Builder</h3>
+                    <p class="text-gray-600 mb-6 text-sm">Gunakan AI Coach ini hanya untuk <strong>inspirasi kerangka (outline)</strong>. (Jangan *copy-paste* utuh untuk naskah final lomba Anda!).</p>
+                    
+                    <div class="flex flex-col md:flex-row gap-4 mb-4">
+                        <select id="speech-theme-select" class="flex-grow p-3 rounded-lg border-2 border-indigo-200 focus:outline-none focus:ring-1 focus:ring-indigo-500 font-medium text-gray-700">
+                            <option value="The Role of Youth in Global Digital Transformation">The Role of Youth in Global Digital Transformation</option>
+                            <option value="Preserving Local Culture in the Modern Era">Preserving Local Culture in the Modern Era</option>
+                            <option value="Education as a Weapon to Change the World">Education as a Weapon to Change the World</option>
+                        </select>
+                        <button id="btn-generate-speech" onclick="generateSpeechOutline()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow transition whitespace-nowrap">
+                            Generate Outline ✨
+                        </button>
+                    </div>
+                    <div id="speech-ai-output" class="hidden bg-white p-6 rounded-lg border border-indigo-100 text-sm text-gray-700 shadow-inner ai-output-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: JADWAL FINAL ================= -->
+        <section id="sec-jadwal" class="view-section hidden animate-fade-in">
+             <div class="mb-8">
+                <h2 class="text-3xl font-bold text-blue-900 border-l-4 border-yellow-500 pl-4">Jadwal Acara Final Offline</h2>
+                <p class="text-gray-600 mt-2">Peserta yang lolos seleksi online akan diundang ke acara puncak tanggal 28 Juni 2026.</p>
+             </div>
+             
+             <div class="bg-white rounded-xl shadow border border-gray-200 overflow-hidden lg:w-2/3">
+                <div class="bg-blue-900 text-white px-6 py-4 flex justify-between items-center">
+                    <h3 class="font-bold text-lg">🕒 Susunan Acara (28 Juni 2026)</h3>
+                    <span class="text-xs bg-yellow-500 text-blue-900 px-2 py-1 rounded font-bold">Auditorium</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-600">
+                        <thead class="bg-gray-50 border-b">
+                            <tr><th class="px-6 py-3 font-bold">Waktu (WIB)</th><th class="px-6 py-3 font-bold">Kegiatan</th><th class="px-6 py-3 font-bold">Lokasi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50"><td class="px-6 py-3 font-medium">08:00 - 08:30</td><td class="px-6 py-3">Registrasi Ulang Finalis</td><td class="px-6 py-3">Meja Registrasi Depan</td></tr>
+                            <tr class="border-b bg-blue-50"><td class="px-6 py-3 font-medium">08:30 - 09:15</td><td class="px-6 py-3">Opening Ceremony</td><td class="px-6 py-3">Panggung Utama</td></tr>
+                            <tr class="border-b"><td class="px-6 py-3 font-medium text-blue-700">09:15 - 12:00</td><td class="px-6 py-3 font-bold">Grand Final Lomba Paralel</td><td class="px-6 py-3">Ruang A & B</td></tr>
+                            <tr class="border-b bg-gray-100"><td class="px-6 py-3 font-medium">12:00 - 13:00</td><td class="px-6 py-3 text-red-600 font-bold">ISHOMA</td><td class="px-6 py-3">Area Konsumsi</td></tr>
+                            <tr class="border-b bg-blue-50"><td class="px-6 py-3 font-medium">13:00 - 14:00</td><td class="px-6 py-3">Rekapitulasi Nilai & Hiburan</td><td class="px-6 py-3">Auditorium Utama</td></tr>
+                            <tr><td class="px-6 py-3 font-medium">14:00 - Selesai</td><td class="px-6 py-3 font-bold text-green-700">Pengumuman Juara</td><td class="px-6 py-3">Panggung Utama</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: FORMULIR PENDAFTARAN ================= -->
+        <section id="sec-formulir" class="view-section hidden animate-fade-in">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-blue-900 border-l-4 border-yellow-500 pl-4">Formulir Pendaftaran Resmi</h2>
+                <p class="text-gray-600 mt-2">Silakan selesaikan pembayaran lalu isi formulir. Data akan otomatis masuk ke <strong>suksesridwan1@gmail.com</strong>.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column: Payment Info (Yunisa Zahro Deristia) -->
+                <div class="lg:col-span-1 space-y-5">
+                    
+                    <!-- Pricing Banner -->
+                    <div class="bg-blue-900 text-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg mb-4 flex items-center border-b border-blue-800 pb-2">
+                                <span class="text-2xl mr-2">&#128179;</span> Rincian Biaya Lomba
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center bg-blue-800 p-2 rounded">
+                                    <span class="text-blue-100 font-medium">MSQ (1 Tim)</span>
+                                    <span class="font-bold text-yellow-400">Rp 150.000</span>
+                                </div>
+                                <div class="flex justify-between items-center bg-blue-800 p-2 rounded">
+                                    <span class="text-blue-100 font-medium">Speech (Individu)</span>
+                                    <span class="font-bold text-yellow-400">Rp 75.000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment 1: BCA -->
+                    <div class="bg-white border border-blue-200 rounded-xl shadow-sm p-5 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-1 rounded-bl-lg">METODE 1</div>
+                        <h4 class="font-bold text-gray-800 mb-1 flex items-center"><span class="text-xl mr-2">&#127974;</span> Bank BCA</h4>
+                        <div class="mt-2 bg-gray-50 p-2 rounded border border-gray-200">
+                            <span class="font-mono text-xl font-bold text-blue-900 tracking-widest">3521352734</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 font-semibold">A.n. Yunisa Zahro Deristia</p>
+                    </div>
+
+                    <!-- Payment 2: Seabank -->
+                    <div class="bg-white border border-orange-200 rounded-xl shadow-sm p-5 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-orange-100 text-orange-800 text-[10px] font-bold px-2 py-1 rounded-bl-lg">METODE 2</div>
+                        <h4 class="font-bold text-gray-800 mb-1 flex items-center"><span class="text-xl mr-2">&#127974;</span> Seabank</h4>
+                        <div class="mt-2 bg-gray-50 p-2 rounded border border-gray-200">
+                            <span class="font-mono text-xl font-bold text-orange-600 tracking-widest">901171210009</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 font-semibold">A.n. Yunisa Zahro Deristia</p>
+                    </div>
+
+                    <!-- Payment 3: Dana -->
+                    <div class="bg-white border border-blue-300 rounded-xl shadow-sm p-5 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">METODE 3</div>
+                        <h4 class="font-bold text-gray-800 mb-1 flex items-center"><span class="text-xl mr-2">&#128241;</span> DANA</h4>
+                        <div class="mt-2 bg-gray-50 p-2 rounded border border-gray-200">
+                            <span class="font-mono text-xl font-bold text-blue-500 tracking-widest">085720455841</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 font-semibold">A.n. Yunisa Zahro Deristia</p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Form Inputs connected to FormSubmit -->
+                <div class="lg:col-span-2">
+                    <div id="form-container" class="bg-white rounded-xl shadow-lg border border-gray-100 p-6 md:p-8">
+                        
+                        <!-- TARGET EMAIL UPDATED to suksesridwan1@gmail.com -->
+                        <form id="registrationForm" onsubmit="submitToEmail(event)" enctype="multipart/form-data">
+                            
+                            <!-- Hidden config fields -->
+                            <input type="hidden" name="_subject" value="Pendaftaran Baru: Nusa Putra Youth Fest 2026">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_template" value="table">
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 font-bold mb-2">Pilih Cabang Lomba <span class="text-red-500">*</span></label>
+                                <select id="lomba_type" name="Cabang_Lomba" required onchange="toggleLombaFields()" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-gray-50">
+                                    <option value="" disabled selected>-- Pilih Lomba --</option>
+                                    <option value="MSQ (Rp 150.000)">Musabaqah Syarhil Qur'an (MSQ) - Rp 150k</option>
+                                    <option value="Speech (Rp 75.000)">English Speech Competition - Rp 75k</option>
+                                </select>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">Asal Sekolah <span class="text-red-500">*</span></label>
+                                    <input type="text" name="Asal_Sekolah" required placeholder="Contoh: SMAN 1 Sukabumi" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">Nama Pendamping/Guru <span class="text-gray-400 font-normal">(Opsional)</span></label>
+                                    <input type="text" name="Nama_Guru_Pendamping" placeholder="Nama Guru Pembimbing" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50">
+                                </div>
+                            </div>
+
+                            <hr class="my-6 border-gray-200">
+
+                            <!-- Dynamic Area: Speech -->
+                            <div id="fields_speech" class="hidden animate-fade-in space-y-4">
+                                <h4 class="font-bold text-blue-900 border-l-4 border-blue-500 pl-2 mb-4">Data Peserta Speech</h4>
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">Nama Lengkap Peserta <span class="text-red-500">*</span></label>
+                                    <input type="text" id="speech_name" name="Nama_Peserta_Speech" placeholder="Masukkan nama lengkap" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50">
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Area: MSQ -->
+                            <div id="fields_msq" class="hidden animate-fade-in space-y-4">
+                                <h4 class="font-bold text-blue-900 border-l-4 border-blue-500 pl-2 mb-4">Data Tim MSQ</h4>
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">Nama Tim / Delegasi <span class="text-red-500">*</span></label>
+                                    <input type="text" id="msq_team" name="Nama_Tim_MSQ" placeholder="Contoh: Tim Kafilah A" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50">
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-gray-700 text-sm font-bold mb-2">Nama Qori/Qoriah</label>
+                                        <input type="text" name="MSQ_Nama_Qori" placeholder="Nama lengkap" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 text-sm font-bold mb-2">Nama Saritilawah</label>
+                                        <input type="text" name="MSQ_Nama_Saritilawah" placeholder="Nama lengkap" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 text-sm font-bold mb-2">Nama Pensyarah</label>
+                                        <input type="text" name="MSQ_Nama_Pensyarah" placeholder="Nama lengkap" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-6 border-gray-200">
+
+                            <!-- Kontak & Upload -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">Nomor WhatsApp <span class="text-red-500">*</span></label>
+                                    <input type="tel" name="Nomor_WhatsApp" required placeholder="08..." class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">Email Peserta <span class="text-red-500">*</span></label>
+                                    <input type="email" name="email" required placeholder="emailanda@gmail.com" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2">Unggah Surat Rekomendasi & Kartu Pelajar <span class="text-red-500">*</span></label>
+                                <p class="text-xs text-gray-500 mb-2">Jadikan satu file PDF (Maks 5MB).</p>
+                                <input type="file" name="Berkas_Persyaratan" accept=".pdf" required class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                            </div>
+
+                            <div class="mb-8">
+                                <label class="block text-gray-700 font-bold mb-2">Unggah Bukti Transfer Pembayaran <span class="text-red-500">*</span></label>
+                                <p class="text-xs text-gray-500 mb-2">Format Gambar (JPG/PNG) atau PDF.</p>
+                                <input type="file" name="Bukti_Pembayaran" accept=".pdf, .jpg, .jpeg, .png" required class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
+                            </div>
+
+                            <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200 mb-6 flex items-start">
+                                <input type="checkbox" required class="mt-1 mr-3 h-4 w-4 text-blue-600 rounded">
+                                <p class="text-xs text-gray-700 text-justify">Saya/Kami menyatakan bahwa seluruh data yang diisi adalah benar, bersedia mematuhi seluruh peraturan, dan memahami bahwa biaya pendaftaran tidak dapat dikembalikan.</p>
+                            </div>
+
+                            <button type="submit" id="btn-submit-form" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition transform hover:-translate-y-1 text-lg">
+                                Kirim Data Pendaftaran ke Email
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white mt-auto py-8">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="font-bold text-xl mb-2">BEM Universitas Nusa Putra</h3>
+            <p class="text-blue-200 text-sm mb-4">Jl. Raya Cibolang No.21, Cisaat, Sukabumi, Jawa Barat</p>
+            <p class="text-blue-300 text-xs">&copy; 2026 Panitia Nusa Putra Youth Fest. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. SPA Navigation Logic ---
+        function navigate(sectionId) {
+            document.querySelectorAll('.view-section').forEach(sec => {
+                sec.classList.add('hidden');
+                sec.classList.remove('animate-fade-in');
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if(link.id === 'nav-formulir') return; // skip custom styled btn
+                link.classList.remove('active', 'text-blue-700', 'font-semibold');
+                link.classList.add('text-gray-600');
+            });
+            const targetSection = document.getElementById('sec-' + sectionId);
+            if(targetSection) {
+                targetSection.classList.remove('hidden');
+                void targetSection.offsetWidth; 
+                targetSection.classList.add('animate-fade-in');
+            }
+            const activeNav = document.getElementById('nav-' + sectionId);
+            if(activeNav && activeNav.id !== 'nav-formulir') {
+                activeNav.classList.add('active', 'text-blue-700', 'font-semibold');
+                activeNav.classList.remove('text-gray-600');
+            }
+            if(sectionId === 'lomba') { setTimeout(initCharts, 100); }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-900', 'text-white');
+                btn.classList.add('bg-white', 'text-blue-900');
+            });
+            document.getElementById('content-' + tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active', 'bg-blue-900', 'text-white');
+            activeBtn.classList.remove('bg-white', 'text-blue-900');
+        }
+
+        // --- 2. Form Interaction & Submission ---
+        function toggleLombaFields() {
+            const type = document.getElementById('lomba_type').value;
+            const msqFields = document.getElementById('fields_msq');
+            const speechFields = document.getElementById('fields_speech');
+            
+            const speechInput = document.getElementById('speech_name');
+            const msqTeamInput = document.getElementById('msq_team');
+
+            if (type.includes('MSQ')) {
+                msqFields.classList.remove('hidden');
+                speechFields.classList.add('hidden');
+                speechInput.required = false;
+                msqTeamInput.required = true;
+            } else if (type.includes('Speech')) {
+                msqFields.classList.add('hidden');
+                speechFields.classList.remove('hidden');
+                speechInput.required = true;
+                msqTeamInput.required = false;
+            }
+        }
+
+        function submitToEmail(event) {
+            event.preventDefault(); 
+            const form = event.target;
+            const btn = document.getElementById('btn-submit-form');
+            
+            btn.innerHTML = 'Mengirim Data... ⏳';
+            btn.disabled = true;
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            const formData = new FormData(form);
+
+            // Fetch to FormSubmit.co targeting suksesridwan1@gmail.com
+            fetch("https://formsubmit.co/ajax/suksesridwan1@gmail.com", {
+                method: "POST",
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const formContainer = document.getElementById('form-container');
+                formContainer.innerHTML = `
+                    <div class="text-center py-12 px-4 animate-fade-in">
+                        <div class="text-7xl mb-6">✅</div>
+                        <h3 class="text-3xl font-extrabold text-green-600 mb-4">Formulir Terkirim!</h3>
+                        <p class="text-gray-600 text-lg mb-6">Data dan berkas Anda telah berhasil dikirim ke email panitia (<strong>suksesridwan1@gmail.com</strong>).</p>
+                        <div class="bg-blue-50 border border-blue-200 p-6 rounded-xl inline-block text-left mb-8 max-w-lg">
+                            <h4 class="font-bold text-blue-900 mb-2 border-b border-blue-200 pb-2">Catatan Penting:</h4>
+                            <p class="text-sm text-gray-700">Jika ini percobaan pertama pengiriman form, pastikan pemilik email mengklik <strong>"Activate FormSubmit"</strong> pada pesan yang masuk di inbox suksesridwan1@gmail.com agar data form dapat diterima sepenuhnya.</p>
+                        </div>
+                        <br>
+                        <button onclick="navigate('home')" class="bg-blue-900 text-white font-bold py-3 px-8 rounded-lg shadow hover:bg-blue-800 transition">
+                            Kembali ke Beranda
+                        </button>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                console.error("Form error:", error);
+                alert("Gagal mengirim. Pastikan internet stabil atau hubungi panitia.");
+                btn.innerHTML = 'Kirim Data Pendaftaran ke Email';
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            });
+        }
+
+        // --- 3. Chart.js Init ---
+        let msqChartInstance = null; let speechChartInstance = null;
+        function initCharts() {
+            Chart.defaults.font.family = "'Segoe UI', Tahoma, sans-serif";
+            const msqCanvas = document.getElementById('msqChart');
+            if (msqCanvas) {
+                if (msqChartInstance) msqChartInstance.destroy();
+                msqChartInstance = new Chart(msqCanvas, { type: 'doughnut', data: { labels: ['Isi (30%)', 'Tajwid (25%)', 'Retorika (20%)', 'Penghayatan (15%)', 'Adab (10%)'], datasets: [{ data: [30, 25, 20, 15, 10], backgroundColor: ['#1E3A8A','#3B82F6','#EAB308','#10B981','#94A3B8'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } } });
+            }
+            const speechCanvas = document.getElementById('speechChart');
+            if (speechCanvas) {
+                if (speechChartInstance) speechChartInstance.destroy();
+                speechChartInstance = new Chart(speechCanvas, { type: 'polarArea', data: { labels: ['Content (30%)', 'Public Speaking (25%)', 'Pronunciation (20%)', 'Grammar (15%)', 'Time (10%)'], datasets: [{ data: [30, 25, 20, 15, 10], backgroundColor: ['rgba(30,58,138,0.7)', 'rgba(234,179,8,0.7)', 'rgba(59,130,246,0.7)', 'rgba(16,185,129,0.7)', 'rgba(148,163,184,0.7)'] }] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { ticks: { display: false } } }, plugins: { legend: { position: 'right' } } } });
+            }
+        }
+
+        // --- 4. Gemini AI Setup ---
+        const apiKey = ""; 
+
+        async function fetchGeminiWithRetry(prompt, systemInstruction, retries = 5) {
+            const delays = [1000, 2000, 4000, 8000, 16000];
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] }
+            };
+
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "Gagal menghasilkan konten.";
+                } catch (error) {
+                    if (i === retries - 1) return "Layanan AI sedang sibuk. Silakan coba lagi nanti.";
+                    await new Promise(resolve => setTimeout(resolve, delays[i]));
+                }
+            }
+        }
+
+        async function generateMSQIdea() {
+            const theme = document.getElementById('msq-theme-select').value;
+            const outputDiv = document.getElementById('msq-ai-output');
+            const btn = document.getElementById('btn-generate-msq');
+            
+            outputDiv.classList.remove('hidden');
+            outputDiv.innerHTML = `<div class="animate-pulse flex space-x-4"><div class="flex-1 space-y-4 py-1"><div class="h-4 bg-indigo-200 rounded w-1/3 mb-6"></div><div class="h-4 bg-indigo-100 rounded w-full"></div><div class="h-4 bg-indigo-100 rounded w-5/6"></div><div class="h-4 bg-indigo-100 rounded w-4/6"></div></div></div>`;
+            btn.disabled = true; btn.classList.add('opacity-50', 'cursor-not-allowed'); btn.innerHTML = 'Memproses... ⏳';
+
+            const systemPrompt = "Anda adalah juri ahli MSQ. Berikan inspirasi syarahan: 1. Judul Puitis, 2. Rekomendasi 1 Ayat Al-Qur'an (Surat, ayat, terjemahan, relevansi), 3. Tiga poin outline materi. Format Markdown standar.";
+            const userPrompt = `Berikan konsep syarahan MSQ untuk tema: "${theme}"`;
+
+            const resultText = await fetchGeminiWithRetry(userPrompt, systemPrompt);
+            outputDiv.innerHTML = marked.parse(resultText);
+            btn.disabled = false; btn.classList.remove('opacity-50', 'cursor-not-allowed'); btn.innerHTML = 'Generate Ide ✨';
+        }
+
+        async function generateSpeechOutline() {
+            const theme = document.getElementById('speech-theme-select').value;
+            const outputDiv = document.getElementById('speech-ai-output');
+            const btn = document.getElementById('btn-generate-speech');
+            
+            outputDiv.classList.remove('hidden');
+            outputDiv.innerHTML = `<div class="animate-pulse flex space-x-4"><div class="flex-1 space-y-4 py-1"><div class="h-4 bg-indigo-200 rounded w-1/3 mb-6"></div><div class="h-4 bg-indigo-100 rounded w-full"></div><div class="h-4 bg-indigo-100 rounded w-5/6"></div><div class="h-4 bg-indigo-100 rounded w-4/6"></div></div></div>`;
+            btn.disabled = true; btn.classList.add('opacity-50', 'cursor-not-allowed'); btn.innerHTML = 'Drafting... ⏳';
+
+            const systemPrompt = "You are an English Speech coach. Create a short outline: 1. Catchy Title, 2. Engaging Hook, 3. Three Main Points, 4. Call to Action. Output strictly in English using standard Markdown formatting.";
+            const userPrompt = `Create a speech outline for: "${theme}"`;
+
+            const resultText = await fetchGeminiWithRetry(userPrompt, systemPrompt);
+            outputDiv.innerHTML = marked.parse(resultText);
+            btn.disabled = false; btn.classList.remove('opacity-50', 'cursor-not-allowed'); btn.innerHTML = 'Generate Outline ✨';
+        }
+
+        // Tailwind Animation Config
+        tailwind.config = { theme: { extend: { animation: { 'fade-in': 'fadeIn 0.4s ease-out forwards', }, keyframes: { fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } } } } } }
+    </script>
+</body>
+</html>
